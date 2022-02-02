@@ -29,7 +29,7 @@ const root = defineComponent({
       set: function (newVal) {
         window.console.log('counter::set');
         // this.secondaryCounter = newVal; // нарушается SOLID для secondaryCounter (не стоит так делать =)
-        this.counter = newVal; // бесконечный цикл - автоастановка
+        // this.counter = newVal; // бесконечный цикл - автоастановка
       },
     },
   },
