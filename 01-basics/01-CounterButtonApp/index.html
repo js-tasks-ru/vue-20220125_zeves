@@ -5,8 +5,14 @@
     <title>CounterButtonApp</title>
   </head>
   <body>
+  {{testmsg}}
     <div id="app">
-      <button type="button">0</button>
+      "{{testmsg}}" | "{{noop}}" <br />
+
+      <button @click="incr" type="button">{{ clicks }}</button>
+      <br />
+      <div>{{ counter }} | {{ secondaryCounter }}</div>
+      <button @click="counter=counter" type="button">setter</button>
     </div>
 
     <script type="module" src="script.js"></script>
