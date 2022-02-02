@@ -42,7 +42,8 @@
         </div>
 
         <div class="col">
-          <input v-model="b" type="number" />
+          <input @change="bGuard" :value="b" type="number" />
+          {{ b }}
         </div>
 
         <div class="col">=</div>
