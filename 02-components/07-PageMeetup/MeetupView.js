@@ -26,7 +26,7 @@ export default defineComponent({
   },
 
   template: `
-    <div v-if="meetup">
+    <div>
     <meetup-cover
       :title="meetup.title"
       :image="meetup.image"
@@ -52,6 +52,5 @@ export default defineComponent({
       </div>
     </ui-container>
     </div>
-    <ui-alert v-else>Нет митапа</ui-alert>
   `,
 });

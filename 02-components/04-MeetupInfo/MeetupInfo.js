@@ -17,10 +17,10 @@ export default defineComponent({
   computed: {
     localizedDate() {
       let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      return new Date(this.$props.date).toLocaleDateString(navigator.language, options);
+      return new Date(this.date).toLocaleDateString(navigator.language, options);
     },
     formatedDate() {
-      return new Date(this.$props.date).toISOString().substr(0, 10);
+      return new Date(this.date).toISOString().substr(0, 10);
     }
   },
   template: `

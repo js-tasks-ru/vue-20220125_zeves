@@ -26,7 +26,7 @@ export default defineComponent({
   },
 
   template: `
-    <div v-if="meetup">
+    <div>
     <meetup-cover
       :title="meetup.title"
       :image="meetup.image"
@@ -40,7 +40,7 @@ export default defineComponent({
 
           <h3>Программа</h3>
           <meetup-agenda v-if="meetup.agenda.length > 0" :agenda="meetup.agenda" />
-            <ui-alert v-else>Программа пока пуста...</ui-alert>
+          <ui-alert v-else>Программа пока пуста...</ui-alert>
         </div>
         <div class="meetup__aside">
           <meetup-info
@@ -52,6 +52,5 @@ export default defineComponent({
       </div>
     </ui-container>
     </div>
-    <ui-alert v-else>Нет митапа</ui-alert>
   `,
 });

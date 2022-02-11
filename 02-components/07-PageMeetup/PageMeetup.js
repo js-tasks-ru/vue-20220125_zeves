@@ -32,21 +32,21 @@ export default defineComponent({
     meetupId: {
       immediate: true,
       handler(value, old) {
-        window.console.log('watch meetupId', this.$props.meetupId);
-        this.$data.meetup = null;
-        this.$data.loading = true;
-        this.$data.error = false;
-        fetchMeetupById(this.$props.meetupId)
+        window.console.log('watch meetupId', this.meetupId);
+        this.meetup = null;
+        this.loading = true;
+        this.error = false;
+        fetchMeetupById(this.meetupId)
           .then((v) => {
             window.console.log(v);
             this.meetup = v;
           })
           .catch((e) => {
             window.console.log(e);
-            this.$data.error = true;
+            this.error = e.message;
           })
           .finally(() => {
-            this.$data.loading = false;
+            this.loading = false;
           });
 
       }
@@ -62,7 +62,7 @@ export default defineComponent({
     </ui-container>
 
     <ui-container v-else-if="error">
-      <ui-alert>Test Error</ui-alert>
+      <ui-alert>{{ error }}</ui-alert>
     </ui-container>
     </div>`,
 });
