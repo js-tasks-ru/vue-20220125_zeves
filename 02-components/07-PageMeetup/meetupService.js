@@ -10,11 +10,12 @@ export async function fetchMeetupById(meetupId) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const meetup = meetups.find((meetup) => meetup.id === meetupId);
+      window.console.log('fetchMeetupById', meetupId);
       if (!meetup) {
         reject(new Error('Not found'));
       }
       resolve(meetup);
-    }, 500);
+    }, 1000);
   });
 }
 
