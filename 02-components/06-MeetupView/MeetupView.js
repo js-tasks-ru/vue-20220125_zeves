@@ -29,7 +29,7 @@ export default defineComponent({
     <div v-if="meetup">
     <meetup-cover
       :title="meetup.title"
-      :image="meetup.imag"
+      :image="meetup.image"
     />
 
     <ui-container>
