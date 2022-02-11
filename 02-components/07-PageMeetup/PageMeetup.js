@@ -62,7 +62,7 @@ export default defineComponent({
     </ui-container>
 
     <ui-container v-else-if="error">
-      <ui-alert>error</ui-alert>
+      <ui-alert>Test Error</ui-alert>
     </ui-container>
     </div>`,
 });
