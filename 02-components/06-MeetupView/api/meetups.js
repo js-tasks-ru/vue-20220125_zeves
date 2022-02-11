@@ -9,7 +9,8 @@ export default [
     date: 1640995200000,
     organizer: 'Demo Organizer',
     place: 'Internet',
-    agenda: [
+    agenda: [],
+    agenda2: [
       {
         id: 7,
         startsAt: '09:00',
