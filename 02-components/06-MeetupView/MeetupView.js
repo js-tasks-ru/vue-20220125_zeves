@@ -47,7 +47,7 @@ export default defineComponent({
             :organizer="meetup.organizer"
             :place="meetup.place"
             :date="meetup.date"
-          >
+          />
         </div>
       </div>
     </ui-container>
