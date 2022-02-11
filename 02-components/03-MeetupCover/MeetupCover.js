@@ -12,11 +12,11 @@ export default defineComponent({
   },
   methods: {
     getBgStyle(image){
-      return `url('${image}')`;
+      return image ? `url('${image}')` : null;
     }
   },
   template: `
-    <div class="meetup-cover" :style="{'--bg-url': image ? getBgStyle(image) : null}">
+    <div class="meetup-cover" :style="{'--bg-url': getBgStyle(image)}">
         <h1 class="meetup-cover__title">{{title}}</h1>
     </div>`,
 });
