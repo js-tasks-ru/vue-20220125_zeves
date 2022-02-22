@@ -112,5 +112,9 @@ export default {
   color: black;
   display: block;
   margin: 20px;
+  cursor: pointer;
+}
+.close:hover {
+  text-decoration: underline;
 }
 </style>
