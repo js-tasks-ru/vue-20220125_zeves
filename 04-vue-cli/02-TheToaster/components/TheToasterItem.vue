@@ -12,7 +12,7 @@ import ToastModel from '../models/toast';
 import icons from '../collections/icons';
 
 export default {
-  name: 'TheToaster',
+  name: 'TheToasterItem',
 
   props: {
     toast: {
