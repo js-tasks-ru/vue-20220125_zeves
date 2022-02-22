@@ -16,7 +16,7 @@ export default {
 
   props: {
     toast: {
-      type     : Object, // если ToastModel - то не пройдет...
+      type     : ToastModel,
       required : true,
       validator: (toast) => Object.keys(icons).includes(toast['icon']),
     }
