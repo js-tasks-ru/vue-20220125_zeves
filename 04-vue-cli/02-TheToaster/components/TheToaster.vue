@@ -1,24 +1,61 @@
 <template>
   <div class="toasts">
-    <div class="toast toast_success">
-      <ui-icon class="toast__icon" icon="check-circle" />
-      <span>Success Toast Example</span>
-    </div>
-
-    <div class="toast toast_error">
-      <ui-icon class="toast__icon" icon="alert-circle" />
-      <span>Error Toast Example</span>
-    </div>
+    <the-toaster-item v-for="toast in toasts" :toast="toast">
+      <template v-slot:close>
+        <div class="close" @click="clearToast(toast)">закрыть</div>
+      </template>
+    </the-toaster-item>
   </div>
 </template>
 
 <script>
 import UiIcon from './UiIcon';
+import TheToasterItem from './TheToasterItem';
+import ToastModel from '../models/toast';
 
 export default {
   name: 'TheToaster',
 
-  components: { UiIcon },
+  data(){
+    return {
+      toasts: []
+    }
+  },
+
+  expose: ['success', 'error'],
+
+  methods: {
+    success(msg, timeout) {
+      this.addToast('success',msg, 'check-circle', timeout);
+    },
+
+    error(msg, timeout) {
+      this.addToast('error',msg, 'alert-circle', timeout);
+    },
+
+    addToast(type, msg, icon = 'check-circle', timeout = 5000) {
+      let model = new ToastModel(type, msg, icon, timeout);
+      let idx = this.toasts.push(model);
+      let modelProxy = this.toasts[idx - 1];
+
+      if(timeout) {
+        modelProxy.timeoutResource = setTimeout(() => {
+          this.clearToast(modelProxy);
+        }, timeout);
+      }
+    },
+
+    clearToast(modelProxy) {
+      for(let toastIdx in this.toasts){
+        if(this.toasts[toastIdx] === modelProxy){
+          clearTimeout(modelProxy.timeoutResource);
+          this.toasts.splice(toastIdx, 1);
+        }
+      }
+    }
+  },
+
+  components: { UiIcon, TheToasterItem }
 };
 </script>
 
@@ -69,5 +106,15 @@ export default {
 
 .toast.toast_error {
   color: var(--red);
+}
+
+.close {
+  color: black;
+  display: block;
+  margin: 20px;
+  cursor: pointer;
+}
+.close:hover {
+  text-decoration: underline;
 }
 </style>

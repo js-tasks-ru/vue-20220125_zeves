@@ -11,6 +11,8 @@
     <p>
       <ui-dropdown v-model="selectedLang" :options="langOptions" title="Язык" />
     </p>
+
+
   </div>
 </template>
 

@@ -1,21 +1,29 @@
 <template>
-  <div class="dropdown dropdown_opened">
-    <button type="button" class="dropdown__toggle dropdown__toggle_icon">
-      <ui-icon icon="tv" class="dropdown__icon" />
-      <span>Title</span>
+  <div class="dropdown" :class="{dropdown_opened:isOpened}">
+    <button @click="toggleOpen"
+            type="button"
+            class="dropdown__toggle"
+            :class="{dropdown__toggle_icon:hasIcon}"
+    >
+      <ui-icon v-if="selectedIcon" :icon="selectedIcon" class="dropdown__icon" />
+      <span>{{selectedText}}</span>
     </button>
 
-    <div class="dropdown__menu" role="listbox">
-      <button class="dropdown__item dropdown__item_icon" role="option" type="button">
-        <ui-icon icon="tv" class="dropdown__icon" />
-        Option 1
-      </button>
-      <button class="dropdown__item dropdown__item_icon" role="option" type="button">
-        <ui-icon icon="tv" class="dropdown__icon" />
-        Option 2
+    <div v-show="isOpened" class="dropdown__menu" role="listbox">
+      <button v-for="option in options"
+              class="dropdown__item" :class="{dropdown__item_icon:hasIcon}"
+              role="option"
+              type="button"
+              @click="updateValue(option.value)"
+      >
+        <ui-icon v-if="option.icon" :icon="option.icon" class="dropdown__icon" />
+        {{option.text}}
       </button>
     </div>
   </div>
+  <select v-show="false" :value="modelValue" @change="updateValue($event.target.value)">
+    <option v-for="option in options" :value="option.value">{{option.text}}</option>
+  </select>
 </template>
 
 <script>
@@ -24,6 +32,56 @@ import UiIcon from './UiIcon';
 export default {
   name: 'UiDropdown',
 
+  data(){
+    return {
+      isOpened: false
+    }
+  },
+
+  props: {
+    options: {
+      type: Array,
+      required: true,
+      validator: (options) => options.reduce(
+        (lastResult, option) => lastResult && option.value && option.text,
+        true
+      )
+    },
+    modelValue: String,
+    title: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    selectedText(){
+      if(!this.modelValue) return this.title;
+      let option = this.options.find((val)=>val.value == this.modelValue, null, this);
+      return option ? option.text : this.title;
+    },
+    selectedIcon(){
+      if(!this.modelValue) return null;
+      let option = this.options.find((val)=>val.value == this.modelValue, null, this);
+      return option.icon;
+    },
+    hasIcon(){
+      return this.options.reduce(
+        (lastResult, option) => lastResult || option.icon,
+        false
+      );
+    }
+  },
+  emits: ['update:modelValue'],
+  methods: {
+    updateValue(event) {
+      console.log(event);
+      this.toggleOpen();
+      this.$emit('update:modelValue', event);
+    },
+    toggleOpen() {
+      this.isOpened = !this.isOpened;
+    }
+  },
   components: { UiIcon },
 };
 </script>
