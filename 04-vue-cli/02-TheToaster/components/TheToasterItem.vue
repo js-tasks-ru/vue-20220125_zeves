@@ -18,7 +18,7 @@ export default {
     toast: {
       type     : Object, // если ToastModel - то не пройдет...
       required : true,
-      validator: (toast) => Object.keys(icons).includes(toast['type']),
+      validator: (toast) => Object.keys(icons).includes(toast['icon']),
     }
   },
 
