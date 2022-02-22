@@ -4,6 +4,7 @@ class ToastModel {
     this.msg = msg;
     this.icon = icon;
     this.timeout = timeout;
+    this.timeoutResource = null;
   }
 }
 

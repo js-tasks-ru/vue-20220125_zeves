@@ -39,7 +39,7 @@ export default {
       let modelProxy = this.toasts[idx - 1];
 
       if(timeout) {
-        setTimeout(() => {
+        modelProxy.timeoutResource = setTimeout(() => {
           this.clearToast(modelProxy);
         }, timeout);
       }
@@ -48,6 +48,7 @@ export default {
     clearToast(modelProxy) {
       for(let toastIdx in this.toasts){
         if(this.toasts[toastIdx] === modelProxy){
+          clearTimeout(modelProxy.timeoutResource);
           this.toasts.splice(toastIdx, 1);
         }
       }
